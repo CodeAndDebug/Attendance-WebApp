@@ -1,5 +1,5 @@
 package org.devshub.dbservice;
 
-public class MainDbservice {
+public class AdminDbservice {
 
 }
