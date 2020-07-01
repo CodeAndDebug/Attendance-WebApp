@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.devshub.bean.Admin;
 import org.devshub.bean.Employee;
@@ -54,11 +55,15 @@ public class Login extends HttpServlet {
 				employee.setPassword(password);
 				try {
 					if (EmployeeDbservice.validateLogin(employee)) {
+						HttpSession httpSession = request.getSession(true);
+						httpSession.setAttribute("email", email);
+						httpSession.setMaxInactiveInterval(50);
 						response.sendRedirect("userHome.jsp");
 					}else {
-						
+						errorPage(request, response);
 					}
 				} catch (ClassNotFoundException | SQLException | IOException e) {
+					errorPage(request, response);
 					e.printStackTrace();
 				}
 			}else if (type.equalsIgnoreCase("admin")) {
@@ -67,21 +72,31 @@ public class Login extends HttpServlet {
 				admin.setPassword(password);
 				try {
 					if (AdminDbservice.validateLogin(admin)) {
+						HttpSession httpSession = request.getSession(true);
+						httpSession.setAttribute("email", email);
+						httpSession.setMaxInactiveInterval(50);
 						response.sendRedirect("adminHome.jsp");
 					}else {
-						
+						errorPage(request, response);
 					}
 				} catch (ClassNotFoundException | SQLException e) {
+					errorPage(request, response);
 					e.printStackTrace();
 				}
 			}else if (type.equalsIgnoreCase("default")) {
-				
+				errorPage(request, response);
 			}else {
-				
+				errorPage(request, response);
 			}
 		}else {
-			
+			errorPage(request, response);
 		}
+	}
+	
+	public static void errorPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("message", "Please Enter Valid Input!!");
+		request.setAttribute("link", "login.jsp");
+		request.getRequestDispatcher("errorPage.jsp").forward(request, response);
 	}
 
 }

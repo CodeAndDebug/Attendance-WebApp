@@ -15,7 +15,7 @@ public class EmployeeDbservice {
 				+ "and password = ?");
 		statement.setString(1, employee.getEmail());
 		statement.setString(2, employee.getPassword());
-		boolean valid = statement.executeQuery()!=null?true:false;
+		boolean valid = statement.executeQuery().isBeforeFirst()?true:false;
 		DataSource.closeConnection(connection);
 		return valid;
 	}
