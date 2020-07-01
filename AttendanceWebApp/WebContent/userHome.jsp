@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="org.devshub.dbservice.EmployeeDbservice" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,15 +45,15 @@
 					</span>
 
 					<div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="#">
-							<button class="login100-form-btn" type="button">
+						<a class="txt1" href="entryservlet" >
+							<button class="login100-form-btn" type="button" disabled="">
 								Entry
 							</button>
 						</a>
                     </div>
                     
                     <div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="#">
+						<a class="txt1" href="exitservlet" >
 							<button class="login100-form-btn" type="button">
 								Exit
 							</button> 
@@ -68,7 +69,7 @@
 					</div>
 
 					<div class="text-center p-t-40">
-						<a class="txt1" href="userProfile.jsp">
+						<a class="txt1" href="viewProfile">
 							My Profile
 						</a>
 					</div>

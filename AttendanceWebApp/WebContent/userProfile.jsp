@@ -42,24 +42,23 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						Profile
                     </span>
-                    
                     <div class="wrap-input100 validate-input" data-validate = "Enter Id">
-						<input class="input100" disabled type="text" value="1000" name="id" placeholder="Profile ID">
+						<input class="input100" disabled type="text" value= "<%= request.getAttribute("id") %>" name="id" placeholder="Profile ID">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter Username">
-						<input class="input100" disabled type="text" value="Vishal Yadav" name="username" placeholder="Username">
+						<input class="input100" disabled type="text" value="<%= request.getAttribute("name") %>" name="username" placeholder="Username">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Age">
-						<input class="input100" disabled type="number" value="22" name="age" placeholder="Age">
+						<input class="input100" disabled type="number" value="<%= request.getAttribute("age") %>" name="age" placeholder="Age">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
 					<div class="wrap-input100" data-validate="Enter Address">
-						<textarea class="textarea100" rows="3" disabled name="address" placeholder="Address">Faridabad, Haryana</textarea>
+						<textarea class="textarea100" rows="3" disabled name="address" placeholder="Address"><%= request.getAttribute("address") %></textarea>
 					</div>
 
 					<div class="text-center p-t-20">
