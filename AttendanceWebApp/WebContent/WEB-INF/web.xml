@@ -41,7 +41,7 @@
 
 	<servlet>
 		<servlet-name>Change Password</servlet-name>
-		<servlet-class>org.devshub.dbservice.servlet</servlet-class>
+		<servlet-class>org.devshub.servlet.ChangePassword</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -53,7 +53,7 @@
 
 	<servlet>
 		<servlet-name>Forget Password</servlet-name>
-		<servlet-class>org.devshub.dbservice.servlet</servlet-class>
+		<servlet-class>org.devshub.servlet.ForgetPassword</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

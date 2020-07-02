@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="GET" action="login.jsp">
+				<form class="login100-form validate-form" method="POST" action="changePassword">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -44,22 +44,22 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Password">
-						<input class="input100" type="password" name="pass" placeholder="Old Password">
+						<input class="input100" type="password" name="old" placeholder="Old Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Enter Password">
-						<input class="input100" type="password" name="pass" placeholder="New Password">
+						<input class="input100" type="password" name="new" placeholder="New Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Enter Password">
-						<input class="input100" type="password" name="pass" placeholder="Confirm Password">
+						<input class="input100" type="password" name="confirm" placeholder="Confirm Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Change
 						</button>
 					</div>

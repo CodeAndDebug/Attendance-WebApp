@@ -19,36 +19,41 @@ import org.devshub.dbservice.EmployeeDbservice;
 
 /**
  * Servlet implementation class Login
+ * 
  * @author vishal
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Login() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String password = request.getParameter("pass");
-		String type = request.getParameter("type");
-        Pattern pattern = Pattern.compile("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$");
-        Matcher matcher = pattern.matcher(email);
-        if (!email.isEmpty() && matcher.matches() && !password.isEmpty() && !type.isEmpty()) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String email = request.getParameter("email").trim();
+		String password = request.getParameter("pass").trim();
+		String type = request.getParameter("type").trim();
+		Pattern pattern = Pattern.compile("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$");
+		Matcher matcher = pattern.matcher(email);
+		if (!email.isEmpty() && matcher.matches() && !password.isEmpty() && !type.isEmpty()) {
 			if (type.equalsIgnoreCase("employee")) {
 				Employee employee = new Employee();
 				employee.setEmail(email);
@@ -57,16 +62,22 @@ public class Login extends HttpServlet {
 					if (EmployeeDbservice.validateLogin(employee)) {
 						HttpSession httpSession = request.getSession(true);
 						httpSession.setAttribute("email", email);
-						httpSession.setMaxInactiveInterval(50);
+						httpSession.setMaxInactiveInterval(60);
 						response.sendRedirect("userHome.jsp");
-					}else {
+					} else {
 						errorPage(request, response);
+						return;
 					}
 				} catch (ClassNotFoundException | SQLException | IOException e) {
-					errorPage(request, response);
 					e.printStackTrace();
+					errorPage(request, response);
+					return;
+				} catch (Exception e) {
+					e.printStackTrace();
+					errorPage(request, response);
+					return;
 				}
-			}else if (type.equalsIgnoreCase("admin")) {
+			} else if (type.equalsIgnoreCase("admin")) {
 				Admin admin = new Admin();
 				admin.setEmail(email);
 				admin.setPassword(password);
@@ -74,26 +85,36 @@ public class Login extends HttpServlet {
 					if (AdminDbservice.validateLogin(admin)) {
 						HttpSession httpSession = request.getSession(true);
 						httpSession.setAttribute("email", email);
-						httpSession.setMaxInactiveInterval(50);
+						httpSession.setMaxInactiveInterval(60);
 						response.sendRedirect("adminHome.jsp");
-					}else {
+					} else {
 						errorPage(request, response);
+						return;
 					}
 				} catch (ClassNotFoundException | SQLException e) {
-					errorPage(request, response);
 					e.printStackTrace();
+					errorPage(request, response);
+					return;
+				} catch (Exception e) {
+					e.printStackTrace();
+					errorPage(request, response);
+					return;
 				}
-			}else if (type.equalsIgnoreCase("default")) {
+			} else if (type.equalsIgnoreCase("default")) {
 				errorPage(request, response);
-			}else {
+				return;
+			} else {
 				errorPage(request, response);
+				return;
 			}
-		}else {
+		} else {
 			errorPage(request, response);
+			return;
 		}
 	}
-	
-	public static void errorPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
+	public static void errorPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("message", "Please Enter Valid Input!!");
 		request.setAttribute("link", "login.jsp");
 		request.getRequestDispatcher("errorPage.jsp").forward(request, response);

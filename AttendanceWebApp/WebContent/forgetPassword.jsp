@@ -34,7 +34,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="forgetPassword" method="post">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -44,12 +44,20 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Email">
-						<input class="input100" type="email" name="email" placeholder="Email Id">
+						<input class="input100" type="email" name="to" placeholder="Email Id">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
+                    
+                    <div class="wrap-input100">
+						<select class="select100" name="type">
+							<option value="employee">Employee</option>
+							<option value="admin">Admin</option>
+						</select>
+						<span class="focus-input100" data-placeholder="&#xf387;"></span>
+					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Get Password
 						</button>
 					</div>
