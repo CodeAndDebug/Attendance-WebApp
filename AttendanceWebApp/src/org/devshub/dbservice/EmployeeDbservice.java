@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.devshub.bean.AttandenceHistory;
 import org.devshub.bean.Employee;
 import org.devshub.datasource.DataSource;
 
@@ -16,6 +19,7 @@ public class EmployeeDbservice {
 
 	public static boolean ifEntryExist(int e_id) throws ClassNotFoundException, SQLException {
 		Connection con = DataSource.getConnection();
+
 		// checking if Entry already exist for today or not.
 		PreparedStatement checkingData = con
 				.prepareStatement("select * from attendance_history where employee_id = ? and date = ?");
@@ -34,10 +38,11 @@ public class EmployeeDbservice {
 		if (EmployeeDbservice.ifEntryExist(e_id) == true) {
 			return false;
 		}
-		;
+
 		// if entry do not exist already then create an entry
-		PreparedStatement stmt = con.prepareStatement("insert into attendance_history values(?,?,?,?,?)");
-		stmt.setInt(1, e_id);
+		PreparedStatement stmt = con.prepareStatement(
+				"insert into attendance_history (history_id,date,entry_time,exit_time,employee_id) values(?,?,?,?,?)");
+		stmt.setObject(1, null);
 		stmt.setDate(2, Date.valueOf(java.time.LocalDate.now()));
 		stmt.setTime(3, Time.valueOf(LocalTime.now()));
 		stmt.setTime(4, Time.valueOf(LocalTime.now()));
@@ -62,7 +67,7 @@ public class EmployeeDbservice {
 		return true;
 	}
 
-	public static Employee getDetails(int e_id) throws ClassNotFoundException, SQLException {
+	public static Employee getEmployeeDetails(int e_id) throws ClassNotFoundException, SQLException {
 
 		Employee emp = new Employee();
 		Connection con = DataSource.getConnection();
@@ -78,7 +83,20 @@ public class EmployeeDbservice {
 
 	}
 
-//	public static List<> getHistory(int e_id) {
-//
-//	}
+	public static List<AttandenceHistory> getAttandenceHistory(int e_id) throws ClassNotFoundException, SQLException {
+		List<AttandenceHistory> historyList = new ArrayList();
+
+		Connection con = DataSource.getConnection();
+		PreparedStatement stmt = con.prepareStatement("select * from attendance_history where employee_id = ?");
+		stmt.setInt(1, e_id);
+		ResultSet rst = stmt.executeQuery();
+		while (rst.next()) {
+			AttandenceHistory ah = new AttandenceHistory();
+			ah.setDate(rst.getDate(2).toString());
+			ah.setEntryTime(rst.getTime(3).toString());
+			ah.setExitTime(rst.getTime(4).toString());
+			historyList.add(ah);
+		}
+		return historyList;
+	}
 }

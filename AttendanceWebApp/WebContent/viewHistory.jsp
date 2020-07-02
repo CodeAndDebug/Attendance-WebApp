@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List,org.devshub.bean.AttandenceHistory" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,37 +46,13 @@
 							<th scope="col">Exit Time</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
+					<tbody><% List <AttandenceHistory> history = (List)request.getAttribute("historyList");
+							int i=1;
+						for(AttandenceHistory ah : history){ 
+							out.print("<tr><td>"+i+"</td><td>"+ah.getDate()+"</td><td>"+ah.getEntryTime()+"</td><td>"+ah.getExitTime()+"</td></tr>");
+							i++;
+						} 
+						%>
 					</tbody>
 				</table>
 			</div>

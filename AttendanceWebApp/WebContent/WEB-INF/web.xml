@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   
+  <!-- entry -->
+  
   <servlet>
   <servlet-name>doEntry</servlet-name>
   <servlet-class>org.devshub.servlet.EntryServlet</servlet-class>
@@ -9,6 +11,8 @@
   <servlet-name>doEntry</servlet-name>
   <url-pattern>/entryservlet</url-pattern>
   </servlet-mapping>
+  
+   <!-- exit -->
   
   <servlet>
   <servlet-name>doExit</servlet-name>
@@ -19,6 +23,7 @@
   <url-pattern>/exitservlet</url-pattern>
   </servlet-mapping>
   
+  <!-- user profile -->
   
   <servlet>
   <servlet-name>profile</servlet-name>
@@ -29,6 +34,16 @@
   <url-pattern>/viewProfile</url-pattern>
   </servlet-mapping>
   
+  <!-- history -->
+  
+  <servlet>
+  <servlet-name>histry</servlet-name>
+  <servlet-class>org.devshub.servlet.AttandenceHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>histry</servlet-name>
+  <url-pattern>/history</url-pattern>
+  </servlet-mapping>
   
  
  

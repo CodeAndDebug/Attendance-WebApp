@@ -35,51 +35,75 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-account"></i>
-					</span>
+				
+					<form class="login100-form validate-form">
+						<span class="login100-form-logo">
+							<i class="zmdi zmdi-account"></i>
+						</span>
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Employee Name
-					</span>
+						<span
+							class="login100-form-title p-b-34 p-t-27">
+							Employee Name
+						</span>
+						
+						<%
+						if(EmployeeDbservice.ifEntryExist(2001)){
+							out.print("<div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
+									"						<a class=\"txt1\" href=\"entryservlet\" >\r\n" + 
+									"							<button class=\"login100-form-btn\" type=\"button\" disabled=\"disabled\">\r\n" + 
+									"								Entry\r\n" + 
+									"							</button>\r\n" + 
+									"						</a>\r\n" + 
+									"                    </div>\r\n" + 
+									"                    \r\n" + 
+									"                    <div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
+									"						<a class=\"txt1\" href=\"exitservlet\" >\r\n" + 
+									"							<button class=\"login100-form-btn\" type=\"button\">\r\n" + 
+									"								Exit\r\n" + 
+									"							</button> \r\n" + 
+									"						</a>\r\n" + 
+									"					</div>");
+					}else{
+						out.print("<div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
+								"				<a class=\"txt1\" href=\"entryservlet\" >\r\n" + 
+								"					<button class=\"login100-form-btn\" type=\"button\" >\r\n" + 
+								"						Entry\r\n" + 
+								"					</button>\r\n" + 
+								"				</a>\r\n" + 
+								"            </div>\r\n" + 
+								"            \r\n" + 
+								"            <div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
+								"				<a class=\"txt1\" href=\"exitservlet\" >\r\n" + 
+								"					<button class=\"login100-form-btn\" type=\"button\" disabled=\"disabled\">\r\n" + 
+								"						Exit\r\n" + 
+								"					</button> \r\n" + 
+								"				</a>\r\n" + 
+								"			</div>");
+					}
+						%>
 
-					<div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="entryservlet" >
-							<button class="login100-form-btn" type="button" disabled="">
-								Entry
-							</button>
-						</a>
-                    </div>
-                    
-                    <div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="exitservlet" >
-							<button class="login100-form-btn" type="button">
-								Exit
-							</button> 
-						</a>
-					</div>
 
-					<div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="viewHistory.jsp">
-							<button class="login100-form-btn" type="button">
-								History
-							</button>
-						</a>
-					</div>
+						<div
+							class="container-login100-form-btn mt-3 mb-3">
+							<a class="txt1" href="history">
+								<button class="login100-form-btn"
+									type="button">
+									History
+								</button>
+							</a>
+						</div>
 
-					<div class="text-center p-t-40">
-						<a class="txt1" href="viewProfile">
-							My Profile
-						</a>
-					</div>
+						<div class="text-center p-t-40">
+							<a class="txt1" href="viewProfile">
+								My Profile
+							</a>
+						</div>
 
-					<div class="text-center p-t-40">
-						<a class="txt1" href="login.jsp">
-							Logout
-						</a>
-					</div>
-				</form>
+						<div class="text-center p-t-40">
+							<a class="txt1" href="login.jsp">Logout</a>
+						</div>
+					</form>
+				
 			</div>
 		</div>
 	</div>
