@@ -95,6 +95,30 @@ public class EmployeeDbservice {
 		}
 	}
 	
+	public static boolean deleteEmployee(int employeeId) throws ClassNotFoundException, SQLException {
+		Connection connection =  DataSource.getConnection();
+		connection.setAutoCommit(false);
+		PreparedStatement statement = connection.prepareStatement("DELETE FROM employee_login_details WHERE employee_login_details.employee_id = ?");
+		statement.setInt(1, employeeId);
+		boolean valid = statement.executeUpdate()>0;
+		
+		try {
+			if (valid) {
+				statement = connection.prepareStatement("DELETE FROM employee_details WHERE employee_details.employee_id = ?");
+				statement.setInt(1, employeeId);
+			
+				valid = statement.executeUpdate()>0;
+				connection.commit();
+				return valid;
+			}else {
+				throw new SQLException("Can't Delete Employee");
+			}
+		} finally {
+			statement.close();
+			DataSource.closeConnection(connection);
+		}
+	}
+	
 
 	public static ArrayList<Employee> getAllEmployees() throws ClassNotFoundException, SQLException {
 		Connection connection =  DataSource.getConnection();

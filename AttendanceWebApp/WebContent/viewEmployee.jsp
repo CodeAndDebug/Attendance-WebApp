@@ -43,8 +43,12 @@
 
 <body>
 	<% 
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if(session.getAttribute("email") == null){
+			response.sendRedirect("login.jsp");
+		}
 		ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("employees");
-		if(employees.isEmpty()){
+		if(employees == null || employees.isEmpty()){
 	%>
 		<div class="message p-b-34 p-t-27"> 
 			No Record Found
@@ -58,7 +62,7 @@
 				<table class="table table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">#</th>
+							<th scope="col">Sr. No</th>
 							<th scope="col">Id</th>
 							<th scope="col">Name</th>
 							<th scope="col">Email</th>
@@ -70,10 +74,12 @@
 					</thead>
 					<tbody>
 						<%
+							int srNo = 0;
 							for(Employee employee : employees){
+								srNo++;
 						%>
 							<tr>
-							<th scope="row">1</th>
+							<th scope="row"><%=srNo %></th>
 							<td><%=employee.getEmployeeId() %></td>
 							<td><%=employee.getEmployeeName() %></td>
 							<td><%=employee.getEmail() %></td>

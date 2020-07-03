@@ -2,7 +2,6 @@ package org.devshub.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,10 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.devshub.bean.Employee;
 import org.devshub.dbservice.EmployeeDbservice;
+import org.devshub.util.Email;
 import org.devshub.util.PasswordGenerator;
 
 /**
@@ -49,6 +48,10 @@ public class AddEmployee extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name, ageStr, gender, email, address;
+		final String pass = PasswordGenerator.generateRandomPassword(8);
+		final String from = "vishal.yadav.developer@gmail.com";
+		final String mailerPassword = "JdNR@21eoxPn";
+		final String subject = "Your Attendance Tracker Account Created";
 		try {
 			name = request.getParameter("name").trim();
 			ageStr = request.getParameter("age").trim();
@@ -71,7 +74,7 @@ public class AddEmployee extends HttpServlet {
 			age = Integer.parseInt(ageStr);
 		}
 
-		System.out.println(name + " " + age + " " + gender + " " + email + " "+matcher.matches()+ " " + address);
+		System.out.println(name + " " + age + " " + gender + " " + email + " " + matcher.matches() + " " + address);
 
 		if (name == null || gender == null || email == null || address == null) {
 			errorPage(request, response, "Please Input All Values");
@@ -86,14 +89,15 @@ public class AddEmployee extends HttpServlet {
 			employee.setGender(gender);
 			employee.setEmail(email);
 			employee.setAddress(address);
-			employee.setPassword(PasswordGenerator.generateRandomPassword(8));
+			employee.setPassword(pass);
 			try {
 				if (EmployeeDbservice.addEmployee(employee)) {
-					ArrayList<Employee> employees = EmployeeDbservice.getAllEmployees();
-					HttpSession httpSession = request.getSession();
-					httpSession.setAttribute("employees", employees);
-					response.sendRedirect("viewEmployee.jsp");
-				}else {
+					if (!Email.send(from, mailerPassword, email, subject, "Your Attendance Tracker Account Password is " + pass)) {
+						errorPage(request, response, "Unable To Send Mail");
+						return;
+					}
+					new ViewEmployees().doPost(request, response);
+				} else {
 					errorPage(request, response, "Unable To Add Employee");
 					return;
 				}

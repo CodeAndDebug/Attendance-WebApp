@@ -45,6 +45,9 @@ public class ForgetPassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String from = "vishal.yadav.developer@gmail.com";
+		String pass = "JdNR@21eoxPn";
+		String subject = "Your Attendance Tracker Password";
 		String to = request.getParameter("to").trim();
 		String type = request.getParameter("type").trim();
 		String message = "";
@@ -69,10 +72,6 @@ public class ForgetPassword extends HttpServlet {
 			e.printStackTrace();
 			errorPage(request, response, "Something Went Wrong");
 		}
-
-		String from = "vishal.yadav.developer@gmail.com";
-		String pass = "JdNR@21eoxPn";
-		String subject = "Your Attendance Tracker Password";
 
 		try {
 			if (Email.send(from, pass, to, subject, message)) {

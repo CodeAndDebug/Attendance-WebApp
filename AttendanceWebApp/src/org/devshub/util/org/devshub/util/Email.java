@@ -46,7 +46,7 @@ public class Email {
 		transport.connect(host, from, pass);
 		transport.sendMessage(msg, msg.getAllRecipients());
 		transport.close();
-		System.out.println("Message sent successfully....");
+		System.out.println("Mail sent successfully....");
 		return true;
 	}
 }
