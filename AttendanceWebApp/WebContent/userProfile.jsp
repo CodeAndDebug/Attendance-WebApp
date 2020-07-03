@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="org.devshub.bean.Employee" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +32,8 @@
 </head>
 <body>
 	
+	<% Employee emp = (Employee)request.getAttribute("emp"); %>
+	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
@@ -43,22 +46,22 @@
 						Profile
                     </span>
                     <div class="wrap-input100 validate-input" data-validate = "Enter Id">
-						<input class="input100" disabled type="text" value= "<%= request.getAttribute("id") %>" name="id" placeholder="Profile ID">
+						<input class="input100" disabled type="text" value= "<%=emp.getEmployeeId() %>" name="id" placeholder="Profile ID">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter Username">
-						<input class="input100" disabled type="text" value="<%= request.getAttribute("name") %>" name="username" placeholder="Username">
+						<input class="input100" disabled type="text" value="<%=emp.getEmployeeName() %>" name="username" placeholder="Username">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Age">
-						<input class="input100" disabled type="number" value="<%= request.getAttribute("age") %>" name="age" placeholder="Age">
+						<input class="input100" disabled type="number" value="<%=emp.getAge() %>" name="age" placeholder="Age">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
 					<div class="wrap-input100" data-validate="Enter Address">
-						<textarea class="textarea100" rows="3" disabled name="address" placeholder="Address"><%= request.getAttribute("address") %></textarea>
+						<textarea class="textarea100" rows="3" disabled name="address" placeholder="Address"><%=emp.getAddress() %></textarea>
 					</div>
 
 					<div class="text-center p-t-20">

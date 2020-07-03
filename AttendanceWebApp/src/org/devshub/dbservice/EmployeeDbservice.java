@@ -79,6 +79,7 @@ public class EmployeeDbservice {
 		emp.setEmployeeName(rst.getString(2));
 		emp.setAge(rst.getInt(3));
 		emp.setAddress(rst.getString(5));
+		DataSource.closeConnection(con);
 		return emp;
 
 	}
@@ -97,6 +98,7 @@ public class EmployeeDbservice {
 			ah.setExitTime(rst.getTime(4).toString());
 			historyList.add(ah);
 		}
+		DataSource.closeConnection(con);
 		return historyList;
 	}
 }

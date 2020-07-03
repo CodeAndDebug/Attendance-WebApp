@@ -36,6 +36,11 @@
 
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		
+		<% List <AttandenceHistory> history = (List)request.getAttribute("historyList");
+							int i=1;
+							if(history.size()>0){ 
+							%>
 			<div class="container table-responsive py-5">
 				<table class="table table-bordered table-hover">
 					<thead class="thead-dark">
@@ -46,21 +51,23 @@
 							<th scope="col">Exit Time</th>
 						</tr>
 					</thead>
-					<tbody><% List <AttandenceHistory> history = (List)request.getAttribute("historyList");
-							int i=1;
-						for(AttandenceHistory ah : history){ 
-							out.print("<tr><td>"+i+"</td><td>"+ah.getDate()+"</td><td>"+ah.getEntryTime()+"</td><td>"+ah.getExitTime()+"</td></tr>");
-							i++;
-						} 
-						%>
+					<tbody>
+					<% for(AttandenceHistory ah : history){%>
+							<tr>
+							<td><%= i %></td>
+							<td><%= ah.getDate()%></td>
+							<td><%= ah.getEntryTime()%></td>
+							<td><%= ah.getExitTime()%></td>
+							</tr>
+						<% i++;}%>
 					</tbody>
 				</table>
 			</div>
+			
+			<%} %>
 
 		</div>
 	</div>
-
-
 	<div id="dropDownSelect1"></div>
 
 	<!--===============================================================================================-->

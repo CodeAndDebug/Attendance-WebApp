@@ -41,50 +41,37 @@
 							<i class="zmdi zmdi-account"></i>
 						</span>
 
-						<span
+						<span>
 							class="login100-form-title p-b-34 p-t-27">
 							Employee Name
 						</span>
 						
+						
 						<%
-						if(EmployeeDbservice.ifEntryExist(2001)){
-							out.print("<div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
-									"						<a class=\"txt1\" href=\"entryservlet\" >\r\n" + 
-									"							<button class=\"login100-form-btn\" type=\"button\" disabled=\"disabled\">\r\n" + 
-									"								Entry\r\n" + 
-									"							</button>\r\n" + 
-									"						</a>\r\n" + 
-									"                    </div>\r\n" + 
-									"                    \r\n" + 
-									"                    <div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
-									"						<a class=\"txt1\" href=\"exitservlet\" >\r\n" + 
-									"							<button class=\"login100-form-btn\" type=\"button\">\r\n" + 
-									"								Exit\r\n" + 
-									"							</button> \r\n" + 
-									"						</a>\r\n" + 
-									"					</div>");
-					}else{
-						out.print("<div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
-								"				<a class=\"txt1\" href=\"entryservlet\" >\r\n" + 
-								"					<button class=\"login100-form-btn\" type=\"button\" >\r\n" + 
-								"						Entry\r\n" + 
-								"					</button>\r\n" + 
-								"				</a>\r\n" + 
-								"            </div>\r\n" + 
-								"            \r\n" + 
-								"            <div class=\"container-login100-form-btn mt-3 mb-3\">\r\n" + 
-								"				<a class=\"txt1\" href=\"exitservlet\" >\r\n" + 
-								"					<button class=\"login100-form-btn\" type=\"button\" disabled=\"disabled\">\r\n" + 
-								"						Exit\r\n" + 
-								"					</button> \r\n" + 
-								"				</a>\r\n" + 
-								"			</div>");
-					}
+						String entry,exit;
+						if(EmployeeDbservice.ifEntryExist(2001)){ 
+						 entry="disabled=\"disabled\"";exit="";
+						 }else{
+							 entry="";exit="disabled=\"disabled\"";
+						 }
 						%>
-
-
-						<div
-							class="container-login100-form-btn mt-3 mb-3">
+						
+							<div class="container-login100-form-btn mt-3 mb-3">
+								<a class="txt1" href="entryservlet"> 
+									<button class="login100-form-btn" type="button" <%=entry %>> 
+										Entry 
+									</button>
+								</a>
+							 </div>
+							 <div class="container-login100-form-btn mt-3 mb-3">
+								<a class="txt1" href="exitservlet">
+							 		<button class="login100-form-btn" type="button" <%=exit %>>
+										Exit 
+									</button> 
+								</a>
+							</div>
+								
+						<div class="container-login100-form-btn mt-3 mb-3">
 							<a class="txt1" href="history">
 								<button class="login100-form-btn"
 									type="button">
