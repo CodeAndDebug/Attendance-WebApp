@@ -56,7 +56,7 @@
                     </div>
                     
                     <div class="container-login100-form-btn mt-3 mb-3">
-						<a href="viewEmployee.jsp" class="txt1">
+						<a href="viewEmployees" class="txt1">
 							<button class="login100-form-btn" type="button">
 								View Employees
 							</button>

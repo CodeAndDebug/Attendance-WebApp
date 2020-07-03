@@ -31,6 +31,7 @@ public class AdminDbservice {
 		if (resultSet.next()) {
 			pass = resultSet.getString("password");
 		}
+		resultSet.close();
 		statement.close();
 		DataSource.closeConnection(connection);
 		return pass;

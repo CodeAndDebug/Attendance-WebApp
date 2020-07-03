@@ -60,6 +60,78 @@
 		<servlet-name>Forget Password</servlet-name>
 		<url-pattern>/forgetPassword</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Add Employee -->
+
+	<servlet>
+		<servlet-name>Add Employee</servlet-name>
+		<servlet-class>org.devshub.servlet.AddEmployee</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Add Employee</servlet-name>
+		<url-pattern>/addEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Search Employees -->
+
+	<servlet>
+		<servlet-name>Search Employee</servlet-name>
+		<servlet-class>org.devshub.servlet.SearchEmployee</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Search Employee</servlet-name>
+		<url-pattern>/searchEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- View Employees -->
+
+	<servlet>
+		<servlet-name>View Employees</servlet-name>
+		<servlet-class>org.devshub.servlet.ViewEmployees</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>View Employees</servlet-name>
+		<url-pattern>/viewEmployees</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Update Employee -->
+
+	<servlet>
+		<servlet-name>Update Employee</servlet-name>
+		<servlet-class>org.devshub.servlet.UpdateEmployee</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Update Employee</servlet-name>
+		<url-pattern>/updateEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Delete Employee -->
+
+	<servlet>
+		<servlet-name>Delete Employee</servlet-name>
+		<servlet-class>org.devshub.servlet.DeleteEmployee</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Delete Employee</servlet-name>
+		<url-pattern>/deleteEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<!-- View History -->
+
+	<servlet>
+		<servlet-name>View History</servlet-name>
+		<servlet-class>org.devshub.servlet.ViewHistory</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>View History</servlet-name>
+		<url-pattern>/viewHistory</url-pattern>
+	</servlet-mapping>
 
 
 </web-app>

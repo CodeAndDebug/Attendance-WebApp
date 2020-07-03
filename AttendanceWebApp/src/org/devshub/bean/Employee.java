@@ -4,6 +4,7 @@ public class Employee {
 
 	private int employeeId;
 	private String employeeName;
+	private String gender;
 	private int age;
 	private String address;
 	private String email;
@@ -31,6 +32,14 @@ public class Employee {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getAddress() {

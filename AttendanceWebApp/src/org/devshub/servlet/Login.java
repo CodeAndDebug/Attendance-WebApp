@@ -60,10 +60,16 @@ public class Login extends HttpServlet {
 				employee.setPassword(password);
 				try {
 					if (EmployeeDbservice.validateLogin(employee)) {
-						HttpSession httpSession = request.getSession(true);
-						httpSession.setAttribute("email", email);
-						httpSession.setMaxInactiveInterval(60);
-						response.sendRedirect("userHome.jsp");
+						int employeeId = EmployeeDbservice.getEmployeeId(email);
+						if (employeeId > 0) {
+							HttpSession httpSession = request.getSession(true);
+							httpSession.setAttribute("email", email);
+							httpSession.setAttribute("empId", employeeId);
+							httpSession.setMaxInactiveInterval(60);
+							response.sendRedirect("userHome.jsp?empId="+employeeId);
+						}else {
+							throw new Exception("Something Went Wrong");
+						}
 					} else {
 						errorPage(request, response);
 						return;

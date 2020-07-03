@@ -34,7 +34,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="addEmployee">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-account"></i>
 					</span>
@@ -43,13 +43,13 @@
 						Add Employee
                     </span>
                     
-                    <div class="wrap-input100 validate-input" data-validate = "Enter Name">
+                    <div class="wrap-input100">
 						<input class="input100" type="text" name="name" placeholder="Name">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter Age">
-						<input class="input100" min="15" type="number" name="age" placeholder="Age">
+					<div class="wrap-input100">
+						<input class="input100" min="1" type="number" name="age" placeholder="Age">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
@@ -68,12 +68,12 @@
 					</div>
 
 
-					<div class="wrap-input100" data-validate="Enter Address">
-						<textarea class="textarea100" rows="3" name="address" placeholder="Address">Faridabad, Haryana</textarea>
+					<div class="wrap-input100">
+						<textarea class="textarea100" rows="3" name="address" placeholder="Address"></textarea>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Add
 						</button>
 					</div>
