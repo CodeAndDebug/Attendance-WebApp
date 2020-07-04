@@ -97,6 +97,19 @@
 		<url-pattern>/viewEmployees</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Edit Employee -->
+
+	<servlet>
+		<servlet-name>Edit Employee</servlet-name>
+		<servlet-class>org.devshub.servlet.EditEmployee</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Edit Employee</servlet-name>
+		<url-pattern>/editEmployee</url-pattern>
+	</servlet-mapping>
+	
+	
 	<!-- Update Employee -->
 
 	<servlet>

@@ -34,7 +34,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="searchEmployee">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-account"></i>
 					</span>
@@ -43,37 +43,32 @@
 						Search Employee
                     </span>
                     
-                    <div class="wrap-input100 validate-input" data-validate = "Enter Name">
-						<input class="input100" type="text" name="name" placeholder="Name">
+                    <div class="wrap-input100">
+						<input class="input100" type="text" name="name" placeholder="Enter Name">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter Age">
-						<input class="input100" min="15" type="number" name="age" placeholder="Age">
+					<div class="wrap-input100">
+						<input class="input100" min="15" type="number" name="age" placeholder="Enter Age">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100">
 						<select class="select100" name="gender">
-							<option value="default">Select Gender</option>
+							<option value="">Select Gender</option>
 							<option value="female">Female</option>
 							<option value="male">Male</option>
 						</select>
 						<span class="focus-input100" data-placeholder="&#xf387;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter Email">
-						<input class="input100" type="email" name="email" placeholder="Email">
+					<div class="wrap-input100">
+						<input class="input100" type="email" name="email" placeholder="Enter Email">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
-
-					<div class="wrap-input100" data-validate="Enter Address">
-						<textarea class="textarea100" rows="3" name="address" placeholder="Address"></textarea>
-					</div>
-
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Search
 						</button>
 					</div>

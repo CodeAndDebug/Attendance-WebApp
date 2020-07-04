@@ -31,102 +31,103 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 	<style type="text/css">
-		.message {
-			font-size: 0.96em;
-			margin: 0 auto;
-			text-transform: capitalize;
-			color: white;
-			text-align: center;
+		.wrap-login100 {
+			width: 95%
 		}
 	</style>
 </head>
 
 <body>
 	<% 
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		if(session.getAttribute("email") == null){
 			response.sendRedirect("login.jsp");
 		}
-		ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("employees");
-		if(employees == null || employees.isEmpty()){
 	%>
-		<div class="message p-b-34 p-t-27"> 
-			No Record Found
-		</div>
-	<%
-		} else {
-	%>
+		
 		<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-masthead.jpg');">
-			<div class="container table-responsive py-5">
-				<table class="table table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">Sr. No</th>
-							<th scope="col">Id</th>
-							<th scope="col">Name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Gender</th>
-							<th scope="col">Age</th>
-							<th scope="col">Address</th>
-							<th scope="col" colspan="3"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							int srNo = 0;
-							for(Employee employee : employees){
-								srNo++;
-						%>
-							<tr>
-							<th scope="row"><%=srNo %></th>
-							<td><%=employee.getEmployeeId() %></td>
-							<td><%=employee.getEmployeeName() %></td>
-							<td><%=employee.getEmail() %></td>
-							<td><%=employee.getGender() %></td>
-							<td><%=employee.getAge() %></td>
-							<td><%=employee.getAddress() %></td>
-							<td>
-								<div class="container-login100-form-btn mt-3 mb-3">
-									<a class="txt1" href="viewHistory?empId=<%=employee.getEmployeeId()%>">
-										<button class="login100-form-btn" type="button">View History</button>
-									</a>
-								</div>
-							</td>
-							<td>
-								<div class="container-login100-form-btn mt-3 mb-3">
-									<a class="txt1" href="editEmployee?empId=<%=employee.getEmployeeId()%>">
-										<button class="login100-form-btn" type="button">Edit</button>
-									</a>
-								</div>
-							</td>
-							<td>
-								<div class="container-login100-form-btn mt-3 mb-3">
-									<a class="txt1" href="deleteEmployee?empId=<%=employee.getEmployeeId()%>">
-										<button class="login100-form-btn" type="button">Delete</button>
-									</a>
-								</div>
-							</td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
-			</div>
+			<div class="wrap-login100">
+				<%
+					ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("employees");
+					if(employees == null || employees.isEmpty()){
+				%>
+						<div class="message p-b-34 p-t-27"> 
+							No Record Found
+						</div>
+				<%
+					} else {
+				%>
+					<div class="container table-responsive py-5">
+					
+						<table class="table table-bordered table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Sr. No</th>
+									<th scope="col">Id</th>
+									<th scope="col">Name</th>
+									<th scope="col">Email</th>
+									<th scope="col">Gender</th>
+									<th scope="col">Age</th>
+									<th scope="col">Address</th>
+									<th scope="col" colspan="3"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<%
+									int srNo = 0;
+									for(Employee employee : employees){
+										srNo++;
+								%>
+									<tr>
+									<th scope="row"><%=srNo %></th>
+									<td><%=employee.getEmployeeId() %></td>
+									<td><%=employee.getEmployeeName() %></td>
+									<td><%=employee.getEmail() %></td>
+									<td><%=employee.getGender() %></td>
+									<td><%=employee.getAge() %></td>
+									<td><%=employee.getAddress() %></td>
+									<td>
+										<div class="container-login100-form-btn mt-3 mb-3">
+											<a class="txt1" href="viewHistory?empId=<%=employee.getEmployeeId()%>">
+												<button class="login100-form-btn" type="button">View History</button>
+											</a>
+										</div>
+									</td>
+									<td>
+										<div class="container-login100-form-btn mt-3 mb-3">
+											<a class="txt1" href="editEmployee?empId=<%=employee.getEmployeeId()%>">
+												<button class="login100-form-btn" type="button">Edit</button>
+											</a>
+										</div>
+									</td>
+									<td>
+										<div class="container-login100-form-btn mt-3 mb-3">
+											<a class="txt1" href="deleteEmployee?empId=<%=employee.getEmployeeId()%>">
+												<button class="login100-form-btn" type="button">Delete</button>
+											</a>
+										</div>
+									</td>
+								</tr>
+								<%
+									}
+								%>
+							</tbody>
+						</table>
+					</div>
+					
+					<%
+						}
+					%>
 
-			<div class="container-login100-form-btn mt-3 mb-3">
-					<a class="txt1" href="adminHome.jsp">
-						<button class="login100-form-btn" type="button">Back</button>
-					</a>
+				<div class="container-login100-form-btn mt-3 mb-3">
+						<a class="txt1" href="adminHome.jsp">
+							<button class="login100-form-btn" type="button">Back</button>
+						</a>
+				</div>
 			</div>
 			
 		</div>
 	</div>
-	<%
-		}
-	%>
-
 
 	<div id="dropDownSelect1"></div>
 
