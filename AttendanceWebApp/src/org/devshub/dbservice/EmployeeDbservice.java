@@ -21,32 +21,28 @@ public class EmployeeDbservice {
 		Connection con = DataSource.getConnection();
 
 		// checking if Entry already exist for today or not.
+
 		PreparedStatement checkingData = con
 				.prepareStatement("select * from attendance_history where employee_id = ? and date = ?");
 		checkingData.setInt(1, e_id);
 		checkingData.setDate(2, Date.valueOf(LocalDate.now()));
 		ResultSet check = checkingData.executeQuery();
-		if (check.next() == true) {
-			return true;
-		}
-		return false;
+		return check.next();
+
 	}
 
 	public static boolean doEntry(int e_id) throws ClassNotFoundException, SQLException {
 		Connection con = DataSource.getConnection();
-
-		if (EmployeeDbservice.ifEntryExist(e_id) == true) {
+		if (EmployeeDbservice.ifEntryExist(e_id)) {
 			return false;
 		}
-
 		// if entry do not exist already then create an entry
 		PreparedStatement stmt = con.prepareStatement(
-				"insert into attendance_history (history_id,date,entry_time,exit_time,employee_id) values(?,?,?,?,?)");
-		stmt.setObject(1, null);
-		stmt.setDate(2, Date.valueOf(java.time.LocalDate.now()));
+				"insert into attendance_history (date,entry_time,exit_time,employee_id) values(?,?,?,?)");
+		stmt.setDate(1, Date.valueOf(java.time.LocalDate.now()));
+		stmt.setTime(2, Time.valueOf(LocalTime.now()));
 		stmt.setTime(3, Time.valueOf(LocalTime.now()));
-		stmt.setTime(4, Time.valueOf(LocalTime.now()));
-		stmt.setInt(5, e_id);
+		stmt.setInt(4, e_id);
 		stmt.executeUpdate();
 		stmt.close();
 		DataSource.closeConnection(con);
@@ -75,7 +71,7 @@ public class EmployeeDbservice {
 		stmt.setInt(1, e_id);
 		ResultSet rst = stmt.executeQuery();
 		rst.next();
-		emp.setEmployeeId(e_id);
+		emp.setEmployeeId(rst.getInt(1));
 		emp.setEmployeeName(rst.getString(2));
 		emp.setAge(rst.getInt(3));
 		emp.setAddress(rst.getString(5));
@@ -85,7 +81,7 @@ public class EmployeeDbservice {
 	}
 
 	public static List<AttandenceHistory> getAttandenceHistory(int e_id) throws ClassNotFoundException, SQLException {
-		List<AttandenceHistory> historyList = new ArrayList();
+		List<AttandenceHistory> historyList = new ArrayList<AttandenceHistory>();
 
 		Connection con = DataSource.getConnection();
 		PreparedStatement stmt = con.prepareStatement("select * from attendance_history where employee_id = ?");
