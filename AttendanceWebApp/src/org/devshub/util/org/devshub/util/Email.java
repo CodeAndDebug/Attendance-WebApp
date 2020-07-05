@@ -6,17 +6,14 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
-	public static void send(String to, String subject, String text) {
-		// Sender's email ID needs to be mentioned
-		String from = "roshanmaqbool66@gmail.com";
-		String pass = "asAS@123";
-
+	public static boolean send(String from, String pass, String to, String subject, String message)
+			throws AddressException, MessagingException {
 		String host = "smtp.gmail.com";
-
 		// Get system properties
 		Properties properties = System.getProperties();
 		// Setup mail server
@@ -29,31 +26,27 @@ public class Email {
 
 		// Get the default Session object.
 		Session session = Session.getDefaultInstance(properties);
+		// Create a default MimeMessage object.
+		MimeMessage msg = new MimeMessage(session);
 
-		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
+		// Set From: header field of the header.
+		msg.setFrom(new InternetAddress(from));
 
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
+		// Set To: header field of the header.
+		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		// Set Subject: header field
+		msg.setSubject(subject);
 
-			// Set Subject: header field
-			message.setSubject(subject);
+		// Now set the actual message
+		msg.setText(message);
 
-			// Now set the actual message
-			message.setText(text);
-
-			// Send message
-			Transport transport = session.getTransport("smtp");
-			transport.connect(host, from, pass);
-			transport.sendMessage(message, message.getAllRecipients());
-			transport.close();
-			System.out.println("Sent message successfully....");
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
-		}
+		// Send message
+		Transport transport = session.getTransport("smtp");
+		transport.connect(host, from, pass);
+		transport.sendMessage(msg, msg.getAllRecipients());
+		transport.close();
+		System.out.println("Mail sent successfully....");
+		return true;
 	}
 }

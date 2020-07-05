@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp"
-    pageEncoding="UTF-8"%>
+<%@page import="org.devshub.bean.Employee"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Profile</title>
+	<title>Update Employee</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -30,51 +30,88 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<%
+		if(session.getAttribute("email") == null){
+			response.sendRedirect("login.jsp");
+		}
+		Employee employee = (Employee)request.getAttribute("employee");
+	%>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="" method="GET">
+				<form class="login100-form validate-form" action="updateEmployee?empId=<%=employee.getEmployeeId()%>" method="post">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-account"></i>
 					</span>
+					
+					<%
+						if(employee == null){
+					%>
+							<div class="message p-b-34 p-t-27"> 
+								No Record Found
+							</div>
+					<%
+						} else {
+					%>
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Profile
-                    </span>
-                    
-                    <div class="wrap-input100 validate-input" data-validate = "Enter Id">
-						<input class="input100" disabled type="text" value="1000" name="id" placeholder="Profile ID">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter Username">
-						<input class="input100" disabled type="text" value="Vishal Yadav" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter Age">
-						<input class="input100" disabled type="number" value="22" name="age" placeholder="Age">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="wrap-input100" data-validate="Enter Address">
-						<textarea class="textarea100" rows="3" disabled name="address" placeholder="Address">Faridabad, Haryana</textarea>
-					</div>
-
-					<div class="text-center p-t-20">
-						<a class="txt1" href="changePassword.jsp">
-							Change Password ?
-						</a>
-					</div>
-
-					<div class="text-center p-t-20">
-						<a class="txt1" href="userHome.jsp">
+							<span class="login100-form-title p-b-34 p-t-27">
+								Update Employee
+		                    </span>
+		                    
+		                    <div class="wrap-input100">
+								<input class="input100" type="text" name="name" value="<%=employee.getEmployeeName() %>" placeholder="Name">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div>
+		
+							<div class="wrap-input100">
+								<input class="input100" min="1" type="number" name="age" value="<%=employee.getAge() %>" placeholder="Age">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div>
+		
+							<div class="wrap-input100">
+								<select class="select100" name="gender">
+									<%
+										if(employee.getGender().equalsIgnoreCase("male")){
+									%>
+										<option value="male" selected="selected">Male</option>
+										<option value="female">Female</option>
+									<%
+										} else if(employee.getGender().equalsIgnoreCase("female")){
+									%>
+										<option value="female" selected="selected">Female</option>
+										<option value="male">Male</option>
+									<%
+										}
+									%>
+								</select>
+								<span class="focus-input100" data-placeholder="&#xf387;"></span>
+							</div>
+		
+							<div class="wrap-input100 validate-input" data-validate = "Enter Email">
+								<input class="input100" type="email" name="email" value="<%=employee.getEmail() %>" placeholder="Email">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div>
+		
+		
+							<div class="wrap-input100">
+								<textarea class="textarea100" rows="3" name="address" placeholder="Address"><%=employee.getAddress() %></textarea>
+							</div>
+		
+							<div class="container-login100-form-btn">
+								<button class="login100-form-btn" type="submit">
+									Update
+								</button>
+							</div>
+					
+					<%
+						}
+					%>
+					<div class="text-center p-t-40">
+						<a class="txt1" href="adminHome.jsp">
 							Back
 						</a>
 					</div>
-
-				</form>
+                </form>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,11 +30,11 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="userHome.jsp">
+				<form class="login100-form validate-form" action="login" method="post">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>

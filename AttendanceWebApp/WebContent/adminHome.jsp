@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,12 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<%
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if(session.getAttribute("email") == null){
+			response.sendRedirect("login.jsp");
+		}
+	%>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
@@ -52,7 +56,7 @@
                     </div>
                     
                     <div class="container-login100-form-btn mt-3 mb-3">
-						<a href="viewEmployee.jsp" class="txt1">
+						<a href="viewEmployees" class="txt1">
 							<button class="login100-form-btn" type="button">
 								View Employees
 							</button>
@@ -68,7 +72,7 @@
 					</div>
 
 					<div class="text-center p-t-40">
-						<a class="txt1" href="login.jsp">
+						<a class="txt1" href="logout">
 							Logout
 						</a>
 					</div>

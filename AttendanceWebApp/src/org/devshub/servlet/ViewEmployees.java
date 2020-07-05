@@ -1,6 +1,8 @@
 package org.devshub.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.devshub.bean.Employee;
+import org.devshub.dbservice.EmployeeDbservice;
+
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class ViewEmployees
+ * 
  * @author vishal
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/ViewEmployees")
+public class ViewEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Logout() {
+	public ViewEmployees() {
 		super();
 	}
 
@@ -30,15 +36,17 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.removeAttribute("email");
-			session.getMaxInactiveInterval();
-			session.invalidate();
-			response.sendRedirect("login.jsp");
-		}else {
-			errorPage(request, response);
-			return;
+		try {
+			ArrayList<Employee> employees = EmployeeDbservice.getAllEmployees();
+			HttpSession httpSession = request.getSession();
+			httpSession.setAttribute("employees", employees);
+			response.sendRedirect("viewEmployee.jsp");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			errorPage(request, response, "Unable To Fetch Records");
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorPage(request, response, "Something Went Wrong");
 		}
 	}
 
@@ -51,9 +59,9 @@ public class Logout extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public static void errorPage(HttpServletRequest request, HttpServletResponse response)
+	public static void errorPage(HttpServletRequest request, HttpServletResponse response, String message)
 			throws ServletException, IOException {
-		request.setAttribute("message", "Something Went Wrong");
+		request.setAttribute("message", message);
 		request.setAttribute("link", "login.jsp");
 		request.getRequestDispatcher("errorPage.jsp").forward(request, response);
 	}

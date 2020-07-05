@@ -3,12 +3,12 @@ package org.devshub.util;
 import java.util.Random;
 
 public class PasswordGenerator {
-	public static String randomString(int len) {
-		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	public static String generateRandomPassword(int len) {
+		String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%&";
 		Random rnd = new Random();
 		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++)
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+			sb.append(chars.charAt(rnd.nextInt(chars.length())));
 		return sb.toString();
 	}
 }
