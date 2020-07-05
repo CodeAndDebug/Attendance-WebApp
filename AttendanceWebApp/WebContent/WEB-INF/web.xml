@@ -145,6 +145,51 @@
 		<servlet-name>View History</servlet-name>
 		<url-pattern>/viewHistory</url-pattern>
 	</servlet-mapping>
+	
+	 <!-- entry -->
+  
+  <servlet>
+  <servlet-name>doEntry</servlet-name>
+  <servlet-class>org.devshub.servlet.EntryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>doEntry</servlet-name>
+  <url-pattern>/entryservlet</url-pattern>
+  </servlet-mapping>
+  
+   <!-- exit -->
+  
+  <servlet>
+  <servlet-name>doExit</servlet-name>
+  <servlet-class>org.devshub.servlet.ExitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>doExit</servlet-name>
+  <url-pattern>/exitservlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- user profile -->
+  
+  <servlet>
+  <servlet-name>profile</servlet-name>
+  <servlet-class>org.devshub.servlet.ViewProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>profile</servlet-name>
+  <url-pattern>/viewProfile</url-pattern>
+  </servlet-mapping>
+  
+  <!-- history -->
+  
+  <servlet>
+  <servlet-name>histry</servlet-name>
+  <servlet-class>org.devshub.servlet.AttandenceHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>histry</servlet-name>
+  <url-pattern>/history</url-pattern>
+  </servlet-mapping>
+  
 
 
 </web-app>

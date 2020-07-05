@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
+<%@ page import="org.devshub.dbservice.EmployeeDbservice" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,25 +47,34 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						Employee Name
 					</span>
-
+						
+						<%
+						  String entry,exit;
+						  if(EmployeeDbservice.ifEntryExist(2001)){ 
+						    entry="disabled=\"disabled\"";exit="";
+						  }else{
+							 entry="";exit="disabled=\"disabled\"";
+						 }
+						%>
+						
 					<div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="#">
-							<button class="login100-form-btn" type="button">
+						<a class="txt1" href="entryservlet">
+							<button class="login100-form-btn" type="button" <%=entry %>>
 								Entry
 							</button>
 						</a>
                     </div>
                     
                     <div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="#">
-							<button class="login100-form-btn" type="button">
+						<a class="txt1" href="exitservlet">
+							<button class="login100-form-btn" type="button" <%=exit %>>
 								Exit
 							</button> 
 						</a>
 					</div>
 
 					<div class="container-login100-form-btn mt-3 mb-3">
-						<a class="txt1" href="viewHistory.jsp">
+						<a class="txt1" href="history">
 							<button class="login100-form-btn" type="button">
 								History
 							</button>
@@ -72,7 +82,7 @@
 					</div>
 
 					<div class="text-center p-t-40">
-						<a class="txt1" href="userProfile.jsp">
+						<a class="txt1" href="viewProfile">
 							My Profile
 						</a>
 					</div>

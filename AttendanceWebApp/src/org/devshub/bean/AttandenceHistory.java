@@ -1,17 +1,8 @@
 package org.devshub.bean;
 
-public class AttendanceHistory {
+public class AttandenceHistory {
 
-	private int historyId;
 	private String entryTime, exitTime, Date;
-
-	public int getHistoryId() {
-		return historyId;
-	}
-
-	public void setHistoryId(int historyId) {
-		this.historyId = historyId;
-	}
 
 	public String getEntryTime() {
 		return entryTime;
@@ -36,4 +27,5 @@ public class AttendanceHistory {
 	public void setDate(String date) {
 		Date = date;
 	}
+
 }

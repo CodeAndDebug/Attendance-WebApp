@@ -1,5 +1,5 @@
-<%@page import="org.devshub.bean.AttendanceHistory"%>
-<%@page import="java.util.ArrayList"%>
+
+<%@ page import="java.util.List,org.devshub.bean.AttandenceHistory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,46 +38,37 @@
 		if(session.getAttribute("email") == null){
 			response.sendRedirect("login.jsp");
 		}
-		ArrayList<AttendanceHistory> history = (ArrayList<AttendanceHistory>)request.getAttribute("historyList");
-		if(history.isEmpty()){
-	%>
-			<div class="message p-b-34 p-t-27"> 
-				No Record Found
+		List <AttandenceHistory> history = (List)request.getAttribute("historyList");
+							int i=1;
+							if(history.size()>0){ 
+							%>
+			<div class="container table-responsive py-5">
+				<table class="table table-bordered table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Date</th>
+							<th scope="col">Entry Time</th>
+							<th scope="col">Exit Time</th>
+						</tr>
+					</thead>
+					<tbody>
+					<% for(AttandenceHistory ah : history){%>
+							<tr>
+							<td><%= i %></td>
+							<td><%= ah.getDate()%></td>
+							<td><%= ah.getEntryTime()%></td>
+							<td><%= ah.getExitTime()%></td>
+							</tr>
+						<% i++;}%>
+					</tbody>
+				</table>
 			</div>
 	<%
 		} else {
 	%>
-			<div class="limiter">
-				<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-					<div class="container table-responsive py-5">
-						<table class="table table-bordered table-hover">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Date</th>
-									<th scope="col">Entry Time</th>
-									<th scope="col">Exit Time</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% 
-									int srNo = 0;
-									for(AttendanceHistory val : history){
-										srNo++;
-								%>
-									<tr>
-									<td><%= srNo %></td>
-									<td><%= val.getDate()%></td>
-									<td><%= val.getEntryTime()%></td>
-									<td><%= val.getExitTime()%></td>
-									</tr>
-								<%
-									}
-								%>
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div class="message p-b-34 p-t-27"> 
+				No Record Found
 			</div>
 	<%
 		}
