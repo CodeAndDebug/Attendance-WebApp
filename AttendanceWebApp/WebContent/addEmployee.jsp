@@ -83,9 +83,7 @@
 
 					<div class="text-center p-t-40">
 						<a class="txt1" href="adminHome.jsp">
-							<button class="login100-form-btn" type="button">
-								Back
-							</button>
+							Back
 						</a>
 					</div>
                 </form>
