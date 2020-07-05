@@ -71,16 +71,18 @@ public class EmployeeDbservice {
 		stmt.setInt(1, e_id);
 		ResultSet rst = stmt.executeQuery();
 		rst.next();
-		emp.setEmployeeId(rst.getInt(1));
-		emp.setEmployeeName(rst.getString(2));
-		emp.setAge(rst.getInt(3));
-		emp.setAddress(rst.getString(5));
+		emp.setEmployeeId(rst.getInt("employee_id"));
+		emp.setEmployeeName(rst.getString("name"));
+		emp.setAge(rst.getInt("age"));
+		emp.setGender(rst.getString("gender"));
+		emp.setAddress(rst.getString("address"));
 		DataSource.closeConnection(con);
 		return emp;
 
 	}
 
 	public static List<AttandenceHistory> getAttandenceHistory(int e_id) throws ClassNotFoundException, SQLException {
+
 		List<AttandenceHistory> historyList = new ArrayList<AttandenceHistory>();
 
 		Connection con = DataSource.getConnection();
@@ -89,9 +91,9 @@ public class EmployeeDbservice {
 		ResultSet rst = stmt.executeQuery();
 		while (rst.next()) {
 			AttandenceHistory ah = new AttandenceHistory();
-			ah.setDate(rst.getDate(2).toString());
-			ah.setEntryTime(rst.getTime(3).toString());
-			ah.setExitTime(rst.getTime(4).toString());
+			ah.setDate(rst.getDate("date").toString());
+			ah.setEntryTime(rst.getTime("entry_time").toString());
+			ah.setExitTime(rst.getTime("exit_time").toString());
 			historyList.add(ah);
 		}
 		DataSource.closeConnection(con);

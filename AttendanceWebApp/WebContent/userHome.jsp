@@ -48,10 +48,10 @@
 						
 						
 						<%
-						String entry,exit;
-						if(EmployeeDbservice.ifEntryExist(2001)){ 
-						 entry="disabled=\"disabled\"";exit="";
-						 }else{
+						  String entry,exit;
+						  if(EmployeeDbservice.ifEntryExist(2001)){ 
+						    entry="disabled=\"disabled\"";exit="";
+						  }else{
 							 entry="";exit="disabled=\"disabled\"";
 						 }
 						%>

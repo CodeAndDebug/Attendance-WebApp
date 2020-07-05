@@ -56,7 +56,12 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Age">
-						<input class="input100" disabled type="number" value="<%=emp.getAge() %>" name="age" placeholder="Age">
+						<input class="input100" disabled type="number" value="<%=emp.getAge()%>" name="age" placeholder="Age">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate="Enter Age">
+						<input class="input100" disabled type="text" value="<%= emp.getGender()%>" name="gender" placeholder="gender">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
