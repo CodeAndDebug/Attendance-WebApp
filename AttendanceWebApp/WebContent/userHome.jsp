@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="errorPage.jsp" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
 <%@ page import="org.devshub.dbservice.EmployeeDbservice" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +35,12 @@
 		if(session.getAttribute("email") == null){
 			response.sendRedirect("login.jsp");
 		}
+		String employeeName = session.getAttribute("name").toString();
+		int id = (int)session.getAttribute("empId");
+		
+		if(employeeName == null || id <= 0){
+			response.sendRedirect("errorPage.jsp");
+		}
 	%>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
@@ -45,17 +51,16 @@
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Employee Name
+						<%=employeeName %>
 					</span>
 						
 						<%
-						int id=(int)session.getAttribute("empId");
-						  String entry,exit;
-						  if(EmployeeDbservice.ifEntryExist(id)){ 
-						    entry="disabled=\"disabled\"";exit="";
-						  }else{
-							 entry="";exit="disabled=\"disabled\"";
-						 }
+						  	String entry,exit;
+							if(EmployeeDbservice.ifEntryExist(id)){ 
+							    entry="disabled=\"disabled\"";exit="";
+							}else{
+								 entry="";exit="disabled=\"disabled\"";
+							}
 						%>
 						
 					<div class="container-login100-form-btn mt-3 mb-3">

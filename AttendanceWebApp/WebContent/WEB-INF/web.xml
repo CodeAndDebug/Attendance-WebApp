@@ -137,12 +137,12 @@
 	<!-- View History -->
 
 	<servlet>
-		<servlet-name>View History</servlet-name>
-		<servlet-class>org.devshub.servlet.ViewHistory</servlet-class>
+		<servlet-name>View Employee History</servlet-name>
+		<servlet-class>org.devshub.servlet.ViewEmployeeHistory</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>View History</servlet-name>
+		<servlet-name>View Employee History</servlet-name>
 		<url-pattern>/viewHistory</url-pattern>
 	</servlet-mapping>
 
@@ -182,11 +182,11 @@
 	<!-- history -->
 
 	<servlet>
-		<servlet-name>histry</servlet-name>
+		<servlet-name>history</servlet-name>
 		<servlet-class>org.devshub.servlet.AttandenceHistoryServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>histry</servlet-name>
+		<servlet-name>history</servlet-name>
 		<url-pattern>/history</url-pattern>
 	</servlet-mapping>
 

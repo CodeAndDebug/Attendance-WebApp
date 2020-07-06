@@ -21,13 +21,14 @@ public class ViewProfileServlet extends HttpServlet {
 			HttpSession httpSession = request.getSession(true);
 			int id = (int) httpSession.getAttribute("empId");
 			emp = EmployeeDbservice.getEmployeeDetails(id);
+			request.setAttribute("emp", emp);
+			request.getRequestDispatcher("userProfile.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			errorMessage(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMessage(request, response);
 		}
-
-		request.setAttribute("emp", emp);
-
-		request.getRequestDispatcher("userProfile.jsp").forward(request, response);
 
 	}
 

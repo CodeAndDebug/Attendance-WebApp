@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" isErrorPage="true"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" isErrorPage="true" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +47,9 @@
 <body>
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if(session.getAttribute("email") == null){
+			response.sendRedirect("login.jsp");
+		}
 	%>
 	<div class="limiter">
 		<div class="container-login100"
@@ -60,6 +62,7 @@
 					<%
 						String message = request.getAttribute("message").toString();
 						String link = request.getAttribute("link").toString();
+						if (message != null && !message.isEmpty()) {
 					%>
 					
 					<div class="message p-b-34 p-t-27"> 
@@ -67,11 +70,31 @@
 					</div>
 					
 					<%
-						if (!link.isEmpty() && !link.equals("view")) {
+						} else {
+					%>
+					
+						<div class="message p-b-34 p-t-27"> 
+							Something Went Wrong
+						</div>
+					
+					<%
+						}
+					%>
+					
+					<%
+						if (link != null && !link.isEmpty()) {
 					%>
 							<div class="container-login100-form-btn mt-3 mb-3">
 								<a class="txt1" href="<%=link%>">
 									<button class="login100-form-btn" type="button">Retry</button>
+								</a>
+							</div>
+					<%
+						} else {
+					%>
+							<div class="container-login100-form-btn mt-3 mb-3">
+								<a class="txt1" href="login.jsp">
+									<button class="login100-form-btn" type="button">Re - Login</button>
 								</a>
 							</div>
 					<%

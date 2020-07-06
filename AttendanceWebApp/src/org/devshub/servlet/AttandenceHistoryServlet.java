@@ -2,7 +2,7 @@ package org.devshub.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,22 +18,26 @@ public class AttandenceHistoryServlet extends HttpServlet {
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<AttandenceHistory> historyList = null;
+		ArrayList<AttandenceHistory> historyList = null;
 		try {
-			HttpSession httpSession = request.getSession(true);
+			HttpSession httpSession = request.getSession();
 			int id = (int) httpSession.getAttribute("empId");
 			historyList = EmployeeDbservice.getAttandenceHistory(id);
+			request.setAttribute("historyList", historyList);
+			request.getRequestDispatcher("viewHistory.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			errorMessage(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
 			errorMessage(request, response);
 		}
 
-		request.setAttribute("historyList", historyList);
-		request.getRequestDispatcher("viewHistory.jsp").forward(request, response);
 	}
 
 	public static void errorMessage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("message", "Sorry an Error Has Occured");
+		request.setAttribute("message", "Something Went Wrong");
 		request.setAttribute("link", "userHome.jsp");
 		request.getRequestDispatcher("errorPage.jsp").forward(request, response);
 	}

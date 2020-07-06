@@ -9,7 +9,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.devshub.bean.AttandenceHistory;
 import org.devshub.bean.Employee;
@@ -72,6 +71,22 @@ public class EmployeeDbservice {
 		statement.close();
 		DataSource.closeConnection(connection);
 		return employeeId;
+	}
+	
+	public static String getEmployeeName(int employeeId) throws SQLException, ClassNotFoundException {
+		Connection connection = DataSource.getConnection();
+		PreparedStatement statement = connection
+				.prepareStatement("select name from attendance.employee_details where employee_id = ?");
+		statement.setInt(1, employeeId);
+		ResultSet resultSet = statement.executeQuery();
+		String employeeName = "";
+		if (resultSet.next()) {
+			employeeName = resultSet.getString("name");
+		}
+		resultSet.close();
+		statement.close();
+		DataSource.closeConnection(connection);
+		return employeeName;
 	}
 
 	public static boolean addEmployee(Employee employee) throws ClassNotFoundException, SQLException {
@@ -234,7 +249,7 @@ public class EmployeeDbservice {
 			statement.setString(4, "%" + employee.getEmail() + "%");
 			break;
 		default:
-			System.out.println("Search For All");
+			
 			break;
 		}
 
@@ -375,14 +390,13 @@ public class EmployeeDbservice {
 		return true;
 	}
 
-	public static List<AttandenceHistory> getAttandenceHistory(int e_id) throws ClassNotFoundException, SQLException {
-
-		List<AttandenceHistory> historyList = new ArrayList<AttandenceHistory>();
-
+	public static ArrayList<AttandenceHistory> getAttandenceHistory(int e_id)
+			throws ClassNotFoundException, SQLException {
 		Connection con = DataSource.getConnection();
 		PreparedStatement stmt = con.prepareStatement("select * from attendance_history where employee_id = ?");
 		stmt.setInt(1, e_id);
 		ResultSet rst = stmt.executeQuery();
+		ArrayList<AttandenceHistory> historyList = new ArrayList<AttandenceHistory>();
 		while (rst.next()) {
 			AttandenceHistory ah = new AttandenceHistory();
 			ah.setDate(rst.getDate("date").toString());

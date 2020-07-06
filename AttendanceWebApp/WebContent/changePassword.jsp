@@ -30,6 +30,12 @@
 <!--===============================================================================================-->
 </head>
 <body>
+
+	<%
+		if(session.getAttribute("email") == null){
+			response.sendRedirect("login.jsp");
+		}
+	%>
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">

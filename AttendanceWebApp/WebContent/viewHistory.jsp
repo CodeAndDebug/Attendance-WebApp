@@ -1,9 +1,7 @@
-
-<%@ page import="java.util.List,org.devshub.bean.AttandenceHistory" %>
+<%@ page import="java.util.ArrayList,org.devshub.bean.AttandenceHistory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<title>History</title>
 	<meta charset="UTF-8">
@@ -30,6 +28,11 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
+	<style type="text/css">
+		.wrap-login100 {
+			width: 95%;
+		}
+	</style>
 </head>
 
 <body>
@@ -38,41 +41,58 @@
 		if(session.getAttribute("email") == null){
 			response.sendRedirect("login.jsp");
 		}
-		List <AttandenceHistory> history = (List)request.getAttribute("historyList");
-							int i=1;
-							if(history.size()>0){ 
-							%>
-			<div class="container table-responsive py-5">
-				<table class="table table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Date</th>
-							<th scope="col">Entry Time</th>
-							<th scope="col">Exit Time</th>
-						</tr>
-					</thead>
-					<tbody>
-					<% for(AttandenceHistory ah : history){%>
-							<tr>
-							<td><%= i %></td>
-							<td><%= ah.getDate()%></td>
-							<td><%= ah.getEntryTime()%></td>
-							<td><%= ah.getExitTime()%></td>
-							</tr>
-						<% i++;}%>
-					</tbody>
-				</table>
-			</div>
+		ArrayList<AttandenceHistory> history = (ArrayList<AttandenceHistory>)request.getAttribute("historyList");
+		int i=1;
+	%>
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-masthead.jpg');">
+			<div class="wrap-login100">
 	<%
-		} else {
+		if(history == null || history.isEmpty()){ 
 	%>
 			<div class="message p-b-34 p-t-27"> 
 				No Record Found
 			</div>
 	<%
-		}
+		} else {
 	%>
+				<div class="container table-responsive py-5">
+					<table class="table table-bordered table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Date</th>
+								<th scope="col">Entry Time</th>
+								<th scope="col">Exit Time</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% 
+							for(AttandenceHistory val : history){
+						%>
+								<tr>
+								<td><%= i++ %></td>
+								<td><%= val.getDate()%></td>
+								<td><%= val.getEntryTime()%></td>
+								<td><%= val.getExitTime()%></td>
+								</tr>
+						<% 
+							}
+						%>
+						</tbody>
+					</table>
+				</div>
+				<%
+					}
+				%>
+					<!-- <div class="container-login100-form-btn mt-3 mb-3">
+							<a class="txt1" href="userHome.jsp">
+								<button class="login100-form-btn" type="button">Back</button>
+							</a>
+					</div> -->
+				</div>
+			</div>
+		</div>
 
 
 	<div id="dropDownSelect1"></div>
