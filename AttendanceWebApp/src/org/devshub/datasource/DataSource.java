@@ -10,7 +10,7 @@ public class DataSource {
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		CONN = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendance", "root", "root");
+		CONN = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendance", "root", "");
 		return CONN;
 	}
 

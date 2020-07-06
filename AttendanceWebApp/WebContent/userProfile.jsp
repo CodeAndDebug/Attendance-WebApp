@@ -32,7 +32,12 @@
 </head>
 <body>
 	
-	<% Employee emp = (Employee)request.getAttribute("emp"); %>
+	<% 
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	if(session.getAttribute("email") == null){
+		response.sendRedirect("login.jsp");
+	}
+	Employee emp = (Employee)request.getAttribute("emp"); %>
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">

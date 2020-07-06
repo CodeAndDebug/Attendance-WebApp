@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="error.jsp" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" errorPage="errorPage.jsp" pageEncoding="UTF-8"%>
 <%@ page import="org.devshub.dbservice.EmployeeDbservice" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +49,9 @@
 					</span>
 						
 						<%
+						int id=(int)session.getAttribute("empId");
 						  String entry,exit;
-						  if(EmployeeDbservice.ifEntryExist(2001)){ 
+						  if(EmployeeDbservice.ifEntryExist(id)){ 
 						    entry="disabled=\"disabled\"";exit="";
 						  }else{
 							 entry="";exit="disabled=\"disabled\"";
